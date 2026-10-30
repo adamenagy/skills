@@ -51,6 +51,17 @@
       "license": "MIT"
     },
     {
+      "name": "aps-inventor-appbundle",
+      "source": "./skills/aps-inventor-appbundle",
+      "description": "Create, deploy, and run Inventor AppBundles on the APS Automation API (Design Automation): scaffold an add-in, package and verify the bundle, publish AppBundle and Activity with aliases, submit WorkItems, and debug reports.",
+      "category": "aps",
+      "tags": ["aps", "inventor", "design-automation", "appbundle", "dotnet"],
+      "author": { "name": "Autodesk" },
+      "homepage": "https://github.com/autodesk-platform-services/skills/tree/main/skills/aps-inventor-appbundle",
+      "repository": "https://github.com/autodesk-platform-services/skills",
+      "license": "MIT"
+    },
+    {
       "name": "aps-mcp-server-gen",
       "source": "./skills/aps-mcp-server-gen",
       "description": "Scaffold a custom MCP (Model Context Protocol) server that integrates with APS. Supports Node.js/TypeScript, .NET/C#, and Python.",

@@ -1,0 +1,44 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>__TFM__</TargetFramework>
+    <AssemblyName>__NAME__</AssemblyName>
+    <RootNamespace>__NAME__</RootNamespace>
+    <PlatformTarget>x64</PlatformTarget>
+    <Nullable>disable</Nullable>
+    <!-- Copy NuGet dependencies (Inventor.Utils) next to the DLL so they land in the bundle -->
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
+    <!-- Only needed to compile: Inventor itself provides the interop at runtime. -->
+    <InventorBinFolder Condition="'$(InventorBinFolder)' == ''">C:\Program Files\Autodesk\Inventor __INVENTOR_VERSION__\Bin</InventorBinFolder>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="__NAME__.Inventor.addin" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Autodesk.Inventor.Interop">
+      <HintPath>$(InventorBinFolder)\Public Assemblies\Autodesk.Inventor.Interop.dll</HintPath>
+      <Private>false</Private>
+      <EmbedInteropTypes>false</EmbedInteropTypes>
+    </Reference>
+    <!-- Must be > 2.0.0 for the 2025_Net8 and newer engines -->
+    <PackageReference Include="Autodesk.Forge.DesignAutomation.Inventor.Utils" Version="2.0.1" />
+  </ItemGroup>
+
+  <!-- Lay out <Name>.bundle/{PackageContents.xml,Contents/*} and zip it with the .bundle folder as the zip root. -->
+  <Target Name="BundlePlugin" AfterTargets="Build">
+    <PropertyGroup>
+      <BundleRoot>$(MSBuildProjectDirectory)\bin\bundle</BundleRoot>
+      <BundleDir>$(BundleRoot)\$(AssemblyName).bundle</BundleDir>
+    </PropertyGroup>
+    <RemoveDir Directories="$(BundleRoot)" />
+    <ItemGroup>
+      <BundleContents Include="$(OutDir)*" Exclude="$(OutDir)*.pdb" />
+    </ItemGroup>
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\PackageContents.xml" DestinationFolder="$(BundleDir)" />
+    <Copy SourceFiles="@(BundleContents)" DestinationFolder="$(BundleDir)\Contents" />
+    <Delete Files="$(MSBuildProjectDirectory)\bin\$(AssemblyName).bundle.zip" />
+    <ZipDirectory SourceDirectory="$(BundleRoot)" DestinationFile="$(MSBuildProjectDirectory)\bin\$(AssemblyName).bundle.zip" />
+  </Target>
+</Project>

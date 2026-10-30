@@ -1,0 +1,14 @@
+{
+  "id": "ChangeParamActivity",
+  "engine": "Autodesk.Inventor+2026",
+  "commandLine": [
+    "$(engine.path)\\InventorCoreConsole.exe /i \"$(args[InventorDoc].path)\" /al \"$(appbundles[ChangeParamApp].path)\" \"$(args[InventorParams].path)\""
+  ],
+  "appbundles": ["ChangeParamApp"],
+  "parameters": {
+    "InventorDoc":    { "verb": "get",  "localName": "Input.ipt",  "description": "Input part" },
+    "InventorParams": { "verb": "get",  "localName": "params.json", "description": "JSON object of parameter name -> expression" },
+    "OutputIpt":      { "verb": "post", "localName": "result.ipt",  "optional": true, "description": "Resized part" }
+  },
+  "settings": {}
+}

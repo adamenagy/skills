@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Addin Type="Plugin">
+  <ClassId>{__GUID__}</ClassId>
+  <ClientId>{__GUID__}</ClientId>
+  <DisplayName>__NAME__</DisplayName>
+  <Description>__NAME__ Inventor Automation plugin</Description>
+  <Assembly>__NAME__.dll</Assembly>
+</Addin>

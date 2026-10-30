@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ApplicationPackage SchemaVersion="1.0" Version="1.0" ProductCode="{__GUID__}" Name="__NAME__" Description="__NAME__ Inventor Automation plugin" Author="__AUTHOR__">
+  <CompanyDetails Name="__AUTHOR__" />
+  <Components>
+    <!-- For the Inventor engine, Platform must be "Inventor" -->
+    <RuntimeRequirements OS="Win64" Platform="Inventor" />
+    <!-- ModuleName points at the .addin manifest, not at the DLL -->
+    <ComponentEntry AppName="__NAME__" AppDescription="__NAME__ App Package."
+                    ModuleName="./Contents/__NAME__.Inventor.addin" />
+  </Components>
+</ApplicationPackage>
